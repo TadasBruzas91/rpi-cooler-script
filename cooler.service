@@ -1,0 +1,11 @@
+[Unit]
+Description=Fan controller
+After=multi-user.target
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=/usr/bin/python3 /usr/services/cooler.py
+
+[Install]
+WantedBy=multi-user.target

@@ -41,7 +41,7 @@ mkdir $HOME/services && echo "Created services dir"
  
 mv cooler.py $HOME/services && echo "services dir => $(ls services)"
 
-sudo chmod a-wx $HOME/services
+sudo chmod go-wx $HOME/services
 
 printf "[Unit]\nDescription=Fan controller\nAfter=multi-user.target\n\n[Service]\nType=simple\nRestart=always\nExecStart=/usr/bin/python3 $(echo $HOME)/services/cooler.py\n\n[Install]\nWantedBy=multi-user.target\n" > cooler.service
 

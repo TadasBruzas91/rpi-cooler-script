@@ -35,11 +35,13 @@ sudo make install
 
 cd .. && echo "Current dir => $(pwd)"
 
-rm -rf master.zip && rm -rf lg-master && echo "Files deleted successfuly"
+rm -rf master.zip && sudo rm -rf lg-master && echo "Files deleted successfuly"
 
 mkdir services && echo "Created services dir"
  
 mv cooler.py services && echo "services dir => $(ls services)"
+
+ehco "[Unit]\nDescription=Fan controller\nAfter=multi-user.target\n\n[Service]\nType=simple\nRestart=always\nExecStart=/usr/bin/python3 $(echo $HOME)/services/cooler.py\n\n[Install]\nWantedBy=multi-user.target\n" >> cooler.service
 
 sudo mv cooler.service /etc/systemd/system && echo "system dir => $(ls /etc/systemd/system | grep cooler)"
 
@@ -57,7 +59,7 @@ sleep 2
 
 sudo systemctl start cooler.service && echo "Started cooler.service"
 
-sleep 2
+sleep 3
 
 sudo systemctl status cooler.service 
 

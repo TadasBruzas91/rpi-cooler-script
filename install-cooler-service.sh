@@ -41,7 +41,7 @@ mkdir services && echo "Created services dir"
  
 mv cooler.py services && echo "services dir => $(ls services)"
 
-echo "[Unit]\nDescription=Fan controller\nAfter=multi-user.target\n\n[Service]\nType=simple\nRestart=always\nExecStart=/usr/bin/python3 $(echo $HOME)/services/cooler.py\n\n[Install]\nWantedBy=multi-user.target\n" >> cooler.service
+printf "[Unit]\nDescription=Fan controller\nAfter=multi-user.target\n\n[Service]\nType=simple\nRestart=always\nExecStart=/usr/bin/python3 $(echo $HOME)/services/cooler.py\n\n[Install]\nWantedBy=multi-user.target\n" >> cooler.service
 
 sudo mv cooler.service /etc/systemd/system && echo "system dir => $(ls /etc/systemd/system | grep cooler)"
 

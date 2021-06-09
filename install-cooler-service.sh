@@ -3,35 +3,49 @@
 
 echo "Install Started"
 
-sudo apt install swig python3 python3-pip python-dev python3-dev -y
+#Preparing install
 
-sudo apt install python-setuptools python3-setuptools -y
+sudo apt update
 
-wget https://github.com/joan2937/lg/archive/master.zip || sudo apt install wget -y
+sudo apt upgrade
 
-unzip master.zip || sudo apt install unzip -y
+sudo apt install swig python3 python3-pip python-dev python3-dev
 
-cd lg-master
+sudo apt install python-setuptools python3-setuptools
 
-sudo apt install make -y
+sudo apt install wget
 
-sudo apt install gcc -y
+sudo apt install make
+
+sudo apt install gcc
+
+sudo apt install unzip
+
+sudo apt-get install systemd
+
+wget https://github.com/joan2937/lg/archive/master.zip
+
+unzip master.zip
+
+cd lg-master && echo "Current dir => $(pwd)"
 
 make
 
 sudo make install
 
+cd .. && echo "Current dir => $(pwd)"
+
+rm -rf master.zip && rm -rf lg-master && echo "Files deleted successfuly"
+
+mkdir services && echo "Created services dir"
+ 
+mv cooler.py services && echo "services dir => $(ls services)"
+
+sudo mv cooler.service /etc/systemd/system && echo "system dir => $(ls /etc/systemd/system | grep cooler)"
+
 cd ..
 
-sudo rm -rf master.zip && sudo rm -rf lg-master
-
-sudo apt-get install -y systemd
-
-sudo mkdir /usr/services
- 
-sudo mv cooler.py /usr/services
-
-sudo mv cooler.service /etc/systemd/system
+rm -rf rpi-cooler-script && echo "Files deleted successfuly"
 
 sudo systemctl daemon-reload && echo "Daemon reloaded"
 
@@ -43,7 +57,7 @@ sleep 2
 
 sudo systemctl start cooler.service && echo "Started cooler.service"
 
-sleep 3
+sleep 2
 
 sudo systemctl status cooler.service 
 

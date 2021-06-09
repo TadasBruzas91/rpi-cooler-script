@@ -7,8 +7,7 @@
 
 ## Run script
 
-1. cd /home/ && sudo git clone https://github.com/TadasBruzas91/rpi-cooler-script.git
-2. cd rpi-cooler-script && sudo ./install-cooler-service.sh
+1. cd $HOME && git clone https://github.com/TadasBruzas91/rpi-cooler-script.git && cd rpi-cooler-script && bash ./install-cooler-service.sh
 
 ## OR Instal Manualy
 

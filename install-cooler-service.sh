@@ -37,9 +37,9 @@ cd .. && echo "Current dir => $(pwd)"
 
 rm -rf master.zip && sudo rm -rf lg-master && echo "Files deleted successfuly"
 
-mkdir services && echo "Created services dir"
+mkdir $HOME/services && echo "Created services dir"
  
-mv cooler.py services && echo "services dir => $(ls services)"
+mv cooler.py $HOME/services && echo "services dir => $(ls services)"
 
 printf "[Unit]\nDescription=Fan controller\nAfter=multi-user.target\n\n[Service]\nType=simple\nRestart=always\nExecStart=/usr/bin/python3 $(echo $HOME)/services/cooler.py\n\n[Install]\nWantedBy=multi-user.target\n" > cooler.service
 

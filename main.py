@@ -16,10 +16,20 @@ except:
     console.warn("To install library run 'pip install python-json-config'")
     sys.exit()
 
-config_builder = ConfigBuilder()
-
-config = config_builder.parse_config("./config.json")
-
 
 if __name__ == "__main__":
-    pass
+    from cooler import FanController
+    config_builder = ConfigBuilder()
+
+    config = config_builder.parse_config("./config.json")
+
+    fanController = FanController()
+    try:
+        fanController.set_high_temp_threshold(
+            config.cooling_temp_threshold.high)
+        fanController.set_low_temp_threshold(config.cooling_temp_threshold.low)
+        fanController.start_lgpio()
+        fanController.set_fan_output_pin(config.output.fan1)
+        fanController.start()
+    except KeyboardInterrupt:
+        fanController.close_lgpio()

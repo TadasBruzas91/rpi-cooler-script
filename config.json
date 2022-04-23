@@ -2,8 +2,8 @@
     "output":{
         "fan1":21
     },
-    "cooling_temp_range":{
-        "high": 65,
+    "cooling_temp_threshold":{
+        "high": 55,
         "low": 50
     }
 }

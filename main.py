@@ -1,5 +1,6 @@
 
 import sys
+from time import sleep
 
 try:
     from py_console import console
@@ -30,6 +31,9 @@ if __name__ == "__main__":
         fanController.set_low_temp_threshold(config.cooling_temp_threshold.low)
         fanController.start_lgpio()
         fanController.set_fan_output_pin(config.output.fan1)
+        fanController.daemon = True
         fanController.start()
+        while True:
+            sleep(60)
     except KeyboardInterrupt:
         fanController.close_lgpio()

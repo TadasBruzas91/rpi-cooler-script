@@ -1,9 +1,13 @@
 {
-    "output":{
-        "fan1":21
+    "output": {
+        "fan1": 21
     },
-    "cooling_temp_threshold":{
-        "high": 55,
-        "low": 50
-    }
+    "cooling_temp_threshold": {
+        "high": 65,
+        "low": 55
+    },
+    "cpu_temp_sensors": [
+        "k10temp",
+        "cpu_thermal"
+    ]
 }

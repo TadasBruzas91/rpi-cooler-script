@@ -2,7 +2,7 @@ from threading import Thread
 import sys
 from time import sleep
 from py_console import console
-import psutil
+from readcputemp import get_cpu_temp
 try:
     import lgpio as sbc
 except:
@@ -31,6 +31,7 @@ class FanController(Thread):
 
     def close_lgpio(self):
         try:
+            self.__fan_switch(0)
             sbc.gpiochip_close(self.__gpio_state)
             console.success("Succesfuly closed lgpio.")
         except:
@@ -57,10 +58,6 @@ class FanController(Thread):
             console.warn(
                 "Low tempt threshold can,t be higher or eaqual to High temp threshold!")
 
-    def __get_cpu_temp(self):
-        self.__cpu_temp = int(psutil.sensors_temperatures()[
-                              "cpu_thermal"][0][1])
-
     def __fan_switch(self, swtch):
         if(self.lgpio_started and self.__fan_output_pin):
             sbc.gpio_write(self.__gpio_state, self.__fan_output_pin, swtch)
@@ -75,7 +72,7 @@ class FanController(Thread):
 
     def run(self):
         while True:
-            self.__get_cpu_temp()
+            self.__cpu_temp = get_cpu_temp()
             self.__chech_if_cooling_rquired()
             print(f"CPU_temp: {self.__cpu_temp}\tFAN_on: {self.__fan_on}")
-            sleep(1)
+            sleep(2)

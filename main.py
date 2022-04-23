@@ -5,8 +5,7 @@ from time import sleep
 try:
     from py_console import console
 except:
-    print(
-        "'py-console' not found!!!\nTo install library run 'pip install py-console'")
+    print("'py-console' not found!!!\nTo install library run 'pip install py-console'")
     sys.exit()
 
 try:

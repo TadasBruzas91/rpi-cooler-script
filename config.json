@@ -1,0 +1,9 @@
+{
+    "output":{
+        "fan1":21
+    },
+    "cooling_temp_range":{
+        "high": 65,
+        "low": 50
+    }
+}
